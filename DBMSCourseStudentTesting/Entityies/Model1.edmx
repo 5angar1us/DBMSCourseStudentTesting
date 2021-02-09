@@ -1,0 +1,836 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище StudentTestingModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AcademicGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="AcademicSubject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="70" Nullable="false" />
+          <Property Name="idSubjects" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idQuestion" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="isCorrect" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTest" Type="int" Nullable="false" />
+          <Property Name="idStudent" Type="int" Nullable="false" />
+          <Property Name="ExamDate" Type="date" Nullable="false" />
+          <Property Name="Mark" Type="smallint" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "StudentTesting.dbo.GroupTesting" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="GroupTesting">
+          <Key>
+            <PropertyRef Name="expirationDate" />
+            <PropertyRef Name="isAvailable" />
+          </Key>
+          <Property Name="idTest" Type="int" />
+          <Property Name="idAcademicGroup" Type="int" />
+          <Property Name="expirationDate" Type="date" Nullable="false" />
+          <Property Name="isAvailable" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "StudentTesting.dbo.Protocol" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Protocol">
+          <Key>
+            <PropertyRef Name="currentDateTime" />
+            <PropertyRef Name="currentIP" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OperationType" />
+            <PropertyRef Name="ObjectName" />
+            <PropertyRef Name="AttributeName" />
+          </Key>
+          <Property Name="currentDateTime" Type="datetime" Nullable="false" />
+          <Property Name="currentIP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="OperationType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ObjectName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AttributeName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NewValue" Type="nchar" MaxLength="200" />
+          <Property Name="OldValue" Type="nchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="idSubjects" Type="int" Nullable="false" />
+          <Property Name="Mark" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAcademicGroup" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Patronymic" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Login" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Patronymic" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Login" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="70" Nullable="false" />
+          <Property Name="PassMark" Type="smallint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AcademicS__idSub__060DEAE8">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AcademicSubject" Type="Self.AcademicSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AcademicSubject">
+              <PropertyRef Name="idSubjects" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Answer__idQuesti__0F975522">
+          <End Role="Question" Type="Self.Question" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="idQuestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__idStu__276EDEB3">
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__idTes__267ABA7A">
+          <End Role="Test" Type="Self.Test" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="idTest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupTest__idAca__30F848ED">
+          <End Role="AcademicGroup" Type="Self.AcademicGroup" Multiplicity="0..1" />
+          <End Role="GroupTesting" Type="Self.GroupTesting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicGroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupTesting">
+              <PropertyRef Name="idAcademicGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupTest__idTes__300424B4">
+          <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
+          <End Role="GroupTesting" Type="Self.GroupTesting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupTesting">
+              <PropertyRef Name="idTest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__idSubj__0AD2A005">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="idSubjects" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__idAcade__21B6055D">
+          <End Role="AcademicGroup" Type="Self.AcademicGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicGroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="idAcademicGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddAcSubjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTeacher" Type="int" Mode="In" />
+          <Parameter Name="idSubject" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddExam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTest" Type="int" Mode="In" />
+          <Parameter Name="idStudent" Type="int" Mode="In" />
+          <Parameter Name="Mark" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="addStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Surname" Type="nchar" Mode="In" />
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <Parameter Name="Patronymic" Type="nchar" Mode="In" />
+          <Parameter Name="idGroup" Type="int" Mode="In" />
+          <Parameter Name="Login" Type="nchar" Mode="In" />
+          <Parameter Name="Password" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="addTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Surname" Type="nchar" Mode="In" />
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <Parameter Name="Patronymic" Type="nchar" Mode="In" />
+          <Parameter Name="Login" Type="nchar" Mode="In" />
+          <Parameter Name="Password" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteAcSubjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTeacher" Type="int" Mode="In" />
+          <Parameter Name="idSubject" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAcSubjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTeacher" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCurrentTest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" />
+                <Property Name="Name" Type="nchar" MaxLength="70" />
+                <Property Name="PassMark" Type="smallint" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetIP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar" />
+        <Function Name="GetLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar" />
+        <Function Name="GetLoginT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetNameOperationDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar" />
+        <Function Name="GetNameOperationInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar" />
+        <Function Name="GetNameOperationUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar" />
+        <Function Name="GetRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="login" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetTableName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="idTable" Type="int" Mode="In" />
+        </Function>
+        <Function Name="isAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="isTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <EntityContainer Name="Хранилище StudentTestingModelContainer">
+          <EntitySet Name="AcademicGroup" EntityType="Self.AcademicGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicSubject" EntityType="Self.AcademicSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Examination" EntityType="Self.Examination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupTesting" EntityType="Self.GroupTesting" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GroupTesting].[idTest] AS [idTest], 
+    [GroupTesting].[idAcademicGroup] AS [idAcademicGroup], 
+    [GroupTesting].[expirationDate] AS [expirationDate], 
+    [GroupTesting].[isAvailable] AS [isAvailable]
+    FROM [dbo].[GroupTesting] AS [GroupTesting]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Protocol" EntityType="Self.Protocol" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Protocol].[currentDateTime] AS [currentDateTime], 
+    [Protocol].[currentIP] AS [currentIP], 
+    [Protocol].[UserName] AS [UserName], 
+    [Protocol].[OperationType] AS [OperationType], 
+    [Protocol].[ObjectName] AS [ObjectName], 
+    [Protocol].[AttributeName] AS [AttributeName], 
+    [Protocol].[NewValue] AS [NewValue], 
+    [Protocol].[OldValue] AS [OldValue]
+    FROM [dbo].[Protocol] AS [Protocol]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__AcademicS__idSub__060DEAE8" Association="Self.FK__AcademicS__idSub__060DEAE8">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="AcademicSubject" EntitySet="AcademicSubject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Answer__idQuesti__0F975522" Association="Self.FK__Answer__idQuesti__0F975522">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__idStu__276EDEB3" Association="Self.FK__Examinati__idStu__276EDEB3">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__idTes__267ABA7A" Association="Self.FK__Examinati__idTes__267ABA7A">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupTest__idAca__30F848ED" Association="Self.FK__GroupTest__idAca__30F848ED">
+            <End Role="AcademicGroup" EntitySet="AcademicGroup" />
+            <End Role="GroupTesting" EntitySet="GroupTesting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupTest__idTes__300424B4" Association="Self.FK__GroupTest__idTes__300424B4">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="GroupTesting" EntitySet="GroupTesting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__idSubj__0AD2A005" Association="Self.FK__Question__idSubj__0AD2A005">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__idAcade__21B6055D" Association="Self.FK__Student__idAcade__21B6055D">
+            <End Role="AcademicGroup" EntitySet="AcademicGroup" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentTestingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="GetCurrentTest_Result">
+          <Property Name="id" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="70" FixedLength="true" Unicode="true" />
+          <Property Name="PassMark" Type="Int16" />
+        </ComplexType>
+        <EntityType Name="AcademicGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="GroupTesting" Relationship="Self.FK__GroupTest__idAca__30F848ED" FromRole="AcademicGroup" ToRole="GroupTesting" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Student__idAcade__21B6055D" FromRole="AcademicGroup" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="AcademicSubject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="70" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="idSubjects" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK__AcademicS__idSub__060DEAE8" FromRole="AcademicSubject" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idQuestion" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="isCorrect" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__Answer__idQuesti__0F975522" FromRole="Answer" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTest" Type="Int32" Nullable="false" />
+          <Property Name="idStudent" Type="Int32" Nullable="false" />
+          <Property Name="ExamDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Mark" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Examinati__idStu__276EDEB3" FromRole="Examination" ToRole="Student" />
+          <NavigationProperty Name="Test" Relationship="Self.FK__Examinati__idTes__267ABA7A" FromRole="Examination" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="idSubjects" Type="Int32" Nullable="false" />
+          <Property Name="Mark" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="Self.FK__Answer__idQuesti__0F975522" FromRole="Question" ToRole="Answer" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK__Question__idSubj__0AD2A005" FromRole="Question" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idAcademicGroup" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AcademicGroup" Relationship="Self.FK__Student__idAcade__21B6055D" FromRole="Student" ToRole="AcademicGroup" />
+          <NavigationProperty Name="Examination" Relationship="Self.FK__Examinati__idStu__276EDEB3" FromRole="Student" ToRole="Examination" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AcademicSubject" Relationship="Self.FK__AcademicS__idSub__060DEAE8" FromRole="Subjects" ToRole="AcademicSubject" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__Question__idSubj__0AD2A005" FromRole="Subjects" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="70" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PassMark" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Examination" Relationship="Self.FK__Examinati__idTes__267ABA7A" FromRole="Test" ToRole="Examination" />
+          <NavigationProperty Name="GroupTesting" Relationship="Self.FK__GroupTest__idTes__300424B4" FromRole="Test" ToRole="GroupTesting" />
+        </EntityType>
+        <EntityType Name="GroupTesting">
+          <Key>
+            <PropertyRef Name="expirationDate" />
+            <PropertyRef Name="isAvailable" />
+          </Key>
+          <Property Name="idTest" Type="Int32" />
+          <Property Name="idAcademicGroup" Type="Int32" />
+          <Property Name="expirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="isAvailable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AcademicGroup" Relationship="Self.FK__GroupTest__idAca__30F848ED" FromRole="GroupTesting" ToRole="AcademicGroup" />
+          <NavigationProperty Name="Test" Relationship="Self.FK__GroupTest__idTes__300424B4" FromRole="GroupTesting" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="Protocol">
+          <Key>
+            <PropertyRef Name="currentDateTime" />
+            <PropertyRef Name="currentIP" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OperationType" />
+            <PropertyRef Name="ObjectName" />
+            <PropertyRef Name="AttributeName" />
+          </Key>
+          <Property Name="currentDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="currentIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OperationType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ObjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AttributeName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NewValue" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="OldValue" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__GroupTest__idAca__30F848ED">
+          <End Role="AcademicGroup" Type="Self.AcademicGroup" Multiplicity="0..1" />
+          <End Role="GroupTesting" Type="Self.GroupTesting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicGroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupTesting">
+              <PropertyRef Name="idAcademicGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__idAcade__21B6055D">
+          <End Role="AcademicGroup" Type="Self.AcademicGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicGroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="idAcademicGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AcademicS__idSub__060DEAE8">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AcademicSubject" Type="Self.AcademicSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AcademicSubject">
+              <PropertyRef Name="idSubjects" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Answer__idQuesti__0F975522">
+          <End Role="Question" Type="Self.Question" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="idQuestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__idStu__276EDEB3">
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__idTes__267ABA7A">
+          <End Role="Test" Type="Self.Test" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="idTest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__idSubj__0AD2A005">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="idSubjects" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupTest__idTes__300424B4">
+          <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
+          <End Role="GroupTesting" Type="Self.GroupTesting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GroupTesting">
+              <PropertyRef Name="idTest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentTestingEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AcademicGroup" EntityType="Self.AcademicGroup" />
+          <EntitySet Name="AcademicSubject" EntityType="Self.AcademicSubject" />
+          <EntitySet Name="Answer" EntityType="Self.Answer" />
+          <EntitySet Name="Examination" EntityType="Self.Examination" />
+          <EntitySet Name="Question" EntityType="Self.Question" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <EntitySet Name="Test" EntityType="Self.Test" />
+          <EntitySet Name="GroupTesting" EntityType="Self.GroupTesting" />
+          <EntitySet Name="Protocol" EntityType="Self.Protocol" />
+          <AssociationSet Name="FK__GroupTest__idAca__30F848ED" Association="Self.FK__GroupTest__idAca__30F848ED">
+            <End Role="AcademicGroup" EntitySet="AcademicGroup" />
+            <End Role="GroupTesting" EntitySet="GroupTesting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__idAcade__21B6055D" Association="Self.FK__Student__idAcade__21B6055D">
+            <End Role="AcademicGroup" EntitySet="AcademicGroup" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AcademicS__idSub__060DEAE8" Association="Self.FK__AcademicS__idSub__060DEAE8">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="AcademicSubject" EntitySet="AcademicSubject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Answer__idQuesti__0F975522" Association="Self.FK__Answer__idQuesti__0F975522">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__idStu__276EDEB3" Association="Self.FK__Examinati__idStu__276EDEB3">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__idTes__267ABA7A" Association="Self.FK__Examinati__idTes__267ABA7A">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__idSubj__0AD2A005" Association="Self.FK__Question__idSubj__0AD2A005">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupTest__idTes__300424B4" Association="Self.FK__GroupTest__idTes__300424B4">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="GroupTesting" EntitySet="GroupTesting" />
+          </AssociationSet>
+          <FunctionImport Name="GetCurrentTest" IsComposable="true" ReturnType="Collection(StudentTestingModel.GetCurrentTest_Result)" />
+          <FunctionImport Name="GetRole" ReturnType="Collection(String)">
+          <Parameter Name="login" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addTeacher">
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Patronymic" Mode="In" Type="String" />
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAcSubjects" ReturnType="Collection(StudentTestingModel.GetAcSubjects_Result)">
+          <Parameter Name="idTeacher" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddAcSubjects">
+            <Parameter Name="idTeacher" Mode="In" Type="Int32" />
+            <Parameter Name="idSubject" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteAcSubjects">
+            <Parameter Name="idTeacher" Mode="In" Type="Int32" />
+            <Parameter Name="idSubject" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="addStudent">
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Patronymic" Mode="In" Type="String" />
+            <Parameter Name="idGroup" Mode="In" Type="Int32" />
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetLoginT" ReturnType="Collection(String)" />
+          <FunctionImport Name="AddExam">
+            <Parameter Name="idTest" Mode="In" Type="Int32" />
+            <Parameter Name="idStudent" Mode="In" Type="Int32" />
+            <Parameter Name="Mark" Mode="In" Type="Int16" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAcSubjects_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="70" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище StudentTestingModelContainer" CdmEntityContainer="StudentTestingEntities1">
+          <EntitySetMapping Name="AcademicGroup">
+            <EntityTypeMapping TypeName="StudentTestingModel.AcademicGroup">
+              <MappingFragment StoreEntitySet="AcademicGroup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcademicSubject">
+            <EntityTypeMapping TypeName="StudentTestingModel.AcademicSubject">
+              <MappingFragment StoreEntitySet="AcademicSubject">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="idSubjects" ColumnName="idSubjects" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answer">
+            <EntityTypeMapping TypeName="StudentTestingModel.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="idQuestion" ColumnName="idQuestion" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="isCorrect" ColumnName="isCorrect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examination">
+            <EntityTypeMapping TypeName="StudentTestingModel.Examination">
+              <MappingFragment StoreEntitySet="Examination">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idTest" ColumnName="idTest" />
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Question">
+            <EntityTypeMapping TypeName="StudentTestingModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="idSubjects" ColumnName="idSubjects" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="StudentTestingModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idAcademicGroup" ColumnName="idAcademicGroup" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="StudentTestingModel.Subjects">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="StudentTestingModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Test">
+            <EntityTypeMapping TypeName="StudentTestingModel.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PassMark" ColumnName="PassMark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupTesting">
+            <EntityTypeMapping TypeName="StudentTestingModel.GroupTesting">
+              <MappingFragment StoreEntitySet="GroupTesting">
+                <ScalarProperty Name="idTest" ColumnName="idTest" />
+                <ScalarProperty Name="idAcademicGroup" ColumnName="idAcademicGroup" />
+                <ScalarProperty Name="expirationDate" ColumnName="expirationDate" />
+                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Protocol">
+            <EntityTypeMapping TypeName="StudentTestingModel.Protocol">
+              <MappingFragment StoreEntitySet="Protocol">
+                <ScalarProperty Name="currentDateTime" ColumnName="currentDateTime" />
+                <ScalarProperty Name="currentIP" ColumnName="currentIP" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="OperationType" ColumnName="OperationType" />
+                <ScalarProperty Name="ObjectName" ColumnName="ObjectName" />
+                <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="Хранилище StudentTestingModel.GetCurrentTest" FunctionImportName="GetCurrentTest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentTestingModel.GetCurrentTest_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PassMark" ColumnName="PassMark" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRole" FunctionName="Хранилище StudentTestingModel.GetRole" />
+          <FunctionImportMapping FunctionImportName="addTeacher" FunctionName="Хранилище StudentTestingModel.addTeacher" />
+          <FunctionImportMapping FunctionImportName="GetAcSubjects" FunctionName="Хранилище StudentTestingModel.GetAcSubjects" >
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentTestingModel.GetAcSubjects_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddAcSubjects" FunctionName="Хранилище StudentTestingModel.AddAcSubjects" />
+          <FunctionImportMapping FunctionImportName="DeleteAcSubjects" FunctionName="Хранилище StudentTestingModel.DeleteAcSubjects" />
+          <FunctionImportMapping FunctionImportName="addStudent" FunctionName="Хранилище StudentTestingModel.addStudent" />
+          <FunctionImportMapping FunctionImportName="GetLoginT" FunctionName="Хранилище StudentTestingModel.GetLoginT" />
+          <FunctionImportMapping FunctionImportName="AddExam" FunctionName="Хранилище StudentTestingModel.AddExam" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

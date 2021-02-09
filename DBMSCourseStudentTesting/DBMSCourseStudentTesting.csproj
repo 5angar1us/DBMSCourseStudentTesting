@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{300BE0BA-14B8-4359-8A99-23E2666155FB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DBMSCourseStudentTesting</RootNamespace>
+    <AssemblyName>DBMSCourseStudentTesting</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CLasses\Role.cs" />
+    <Compile Include="CLasses\User.cs" />
+    <Compile Include="Tables\AdminTables\Test_AcSub.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Test_AcSub.Designer.cs">
+      <DependentUpon>Test_AcSub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\AutorizationTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\AutorizationTest.designer.cs">
+      <DependentUpon>AutorizationTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Tests.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Tests.Designer.cs">
+      <DependentUpon>Tests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\Test\TeacherTables\EditTestAccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\Test\TeacherTables\EditTestAccess.Designer.cs">
+      <DependentUpon>EditTestAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\Test\StudenteTables\ReadTest\AnsverControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tables\Test\StudenteTables\ReadTest\AnsverControl.designer.cs">
+      <DependentUpon>AnsverControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CLasses\ControlsFactory.cs" />
+    <Compile Include="Tables\Test\TeacherTables\EditTest\EditQuestionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tables\Test\TeacherTables\EditTest\EditQuestionControl.Designer.cs">
+      <DependentUpon>EditQuestionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CLasses\EntityFactory.cs" />
+    <Compile Include="Tables\Test\StudenteTables\ReadTest\QuestionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tables\Test\StudenteTables\ReadTest\QuestionControl.designer.cs">
+      <DependentUpon>QuestionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\Test\TeacherTables\EditTest\EditAnsverContol.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tables\Test\TeacherTables\EditTest\EditAnsverContol.Designer.cs">
+      <DependentUpon>EditAnsverContol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CLasses\TbRoCoutnt.cs" />
+    <Compile Include="Tables\Test\TeacherTables\EditTest\EditTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\Test\TeacherTables\EditTest\EditTest.Designer.cs">
+      <DependentUpon>EditTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\AcademicGroup.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\AcademicSubject.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Answer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Examination.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\GetAcSubjects_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\GetCurrentTest_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\GroupTesting.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Protocol.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Question.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Student.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Subjects.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Teacher.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entityies\Test.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CLasses\Location.cs" />
+    <Compile Include="Tables\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\Main.designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\Test\TeacherTables\TeacherStatisticks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\Test\TeacherTables\TeacherStatisticks.Designer.cs">
+      <DependentUpon>TeacherStatisticks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\Test\StudenteTables\TestStatictic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\Test\StudenteTables\TestStatictic.Designer.cs">
+      <DependentUpon>TestStatictic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Administration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Administration.designer.cs">
+      <DependentUpon>Administration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\Autorization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\Autorization.designer.cs">
+      <DependentUpon>Autorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tables\AdminTables\Students.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Students.Designer.cs">
+      <DependentUpon>Students.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Teachers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Teachers.Designer.cs">
+      <DependentUpon>Teachers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Protocol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Protocol.designer.cs">
+      <DependentUpon>Protocol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Teacher_AcSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\AdminTables\Teacher_AcSubject.Designer.cs">
+      <DependentUpon>Teacher_AcSubject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables\Test\StudenteTables\ReadTest\TestStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables\Test\StudenteTables\ReadTest\TestStudent.Designer.cs">
+      <DependentUpon>TestStudent.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Tables\AdminTables\Students.resx">
+      <DependentUpon>Students.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\AdminTables\Test_AcSub.resx">
+      <DependentUpon>Test_AcSub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\AutorizationTest.resx">
+      <DependentUpon>AutorizationTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\AdminTables\Tests.resx">
+      <DependentUpon>Tests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Test\TeacherTables\EditTestAccess.resx">
+      <DependentUpon>EditTestAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Test\StudenteTables\ReadTest\AnsverControl.resx">
+      <DependentUpon>AnsverControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Test\TeacherTables\EditTest\EditQuestionControl.resx">
+      <DependentUpon>EditQuestionControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Test\StudenteTables\ReadTest\QuestionControl.resx">
+      <DependentUpon>QuestionControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Test\TeacherTables\EditTest\EditAnsverContol.resx">
+      <DependentUpon>EditAnsverContol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Test\TeacherTables\EditTest\EditTest.resx">
+      <DependentUpon>EditTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Test\TeacherTables\TeacherStatisticks.resx">
+      <DependentUpon>TeacherStatisticks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Test\StudenteTables\TestStatictic.resx">
+      <DependentUpon>TestStatictic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\AdminTables\Administration.resx">
+      <DependentUpon>Administration.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Autorization.resx">
+      <DependentUpon>Autorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Tables\AdminTables\Teachers.resx">
+      <DependentUpon>Teachers.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\AdminTables\Protocol.resx">
+      <DependentUpon>Protocol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\AdminTables\Teacher_AcSubject.resx">
+      <DependentUpon>Teacher_AcSubject.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables\Test\StudenteTables\ReadTest\TestStudent.resx">
+      <DependentUpon>TestStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="Entityies\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Entityies\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entityies\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entityies\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>

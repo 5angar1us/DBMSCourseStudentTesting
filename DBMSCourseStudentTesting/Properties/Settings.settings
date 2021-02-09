@@ -1,0 +1,19 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DBMSCourseStudentTesting.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DataSource" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SERGEI-ПК\SQLEXPRESS</Value>
+    </Setting>
+    <Setting Name="StudentTestingEntities1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">metadata=res://*/Entityies.Model1.csdl|res://*/Entityies.Model1.ssdl|res://*/Entityies.Model1.msl;provider=System.Data.SqlClient;provider connection string="data source=@dataSource;initial catalog=@DataBase
+;user id=@login;password=@password;MultipleActiveResultSets=True;App=EntityFramework&amp;quot;"</Value>
+    </Setting>
+    <Setting Name="connectStudentTestingEntities" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DataBase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">StudentTesting</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

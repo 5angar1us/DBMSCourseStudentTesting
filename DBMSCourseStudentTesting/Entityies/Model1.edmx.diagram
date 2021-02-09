@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d75ec6cc90a0498dbe2a73c2c02fb104" Name="Diagram1">
+        <EntityTypeShape EntityType="StudentTestingModel.AcademicGroup" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.AcademicSubject" Width="1.5" PointX="8" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.Answer" Width="1.5" PointX="10.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.Examination" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.Question" Width="1.5" PointX="8" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.Student" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.Subjects" Width="1.5" PointX="5.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.Teacher" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.Test" Width="1.5" PointX="3.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.GroupTesting" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestingModel.Protocol" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="StudentTestingModel.FK__GroupTest__idAca__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestingModel.FK__Student__idAcade__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestingModel.FK__AcademicS__idSub__060DEAE8" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestingModel.FK__Answer__idQuesti__0F975522" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestingModel.FK__Examinati__idStu__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestingModel.FK__Examinati__idTes__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestingModel.FK__Question__idSubj__0AD2A005" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestingModel.FK__GroupTest__idTes__300424B4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
